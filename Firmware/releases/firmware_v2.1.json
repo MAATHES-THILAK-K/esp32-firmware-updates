@@ -1,5 +1,0 @@
-{
-  "latest_version": "v2.1",
-  "description": "Refined the firmware by commenting out all debugging-related serial prints and streamlining the Serial Monitor output for a clean, professional presentation.",
-  "url": "https://raw.githubusercontent.com/MAATHES-THILAK-K/Stellar_Vision_V1/main/Firmware/releases/firmware_v2.1/firmware.bin"
-}
