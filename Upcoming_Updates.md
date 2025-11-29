@@ -9,7 +9,23 @@
 ### **ESP IDF Migration**
   - To Make more efficient firmware
   - To deploy as a Product that is affordable for everyone
- 
+
+ Below is a **much simpler, cleaner, minimal version** while keeping a professional tone.
+
+---
+
+### **Rubber-Dome Key Switch Upgrade**
+
+The next hardware revision will use **rubber-dome (TV-remote style) key switches** to improve comfort and typing accuracy.
+
+#### **Benefits**
+
+* **Soft, quiet keys** for better long-term comfort.
+* **Reliable multi-press performance**, ideal for Braille chords.
+* **Consistent tactile feedback** to help users confirm each input.
+* **Long lifespan** (1–5 million presses).
+* **Slim design**, suitable for compact assistive devices.
+* 
 ### 1. **mmWave Sensor for Person Detection**
 - **Sensor**: RCWL-9196 or LD2410 mmWave radar
 - **Purpose**: Detect human presence without cameras
