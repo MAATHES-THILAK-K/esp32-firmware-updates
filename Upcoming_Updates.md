@@ -14,7 +14,7 @@
 
 ### **Rubber-Dome Key Switch Upgrade**
 
-The next hardware revision will use **rubber-dome (TV-remote style) key switches** to improve comfort and typing accuracy.
+The next hardware revision will use **rubber-dome (TV-remote style) key switches** to improve comfort and typing accuracy,and also add the female usb port for HID Emulation (As of now fixed USB cable is there).
 
 #### **Benefits**
 
