@@ -24,7 +24,7 @@
 Adafruit_MPU6050 mpu;
 
 // ================== OTA UPDATE CONFIG ==================
-#define CURRENT_FIRMWARE_VERSION "v2.0"
+#define CURRENT_FIRMWARE_VERSION "v3.0"
 const char* latestInfoURL = "https://raw.githubusercontent.com/MAATHES-THILAK-K/Stellar_Vision_V1/main/Firmware/latest.json";
 
 // Calibration Offsets - Calibrate them based on your MPU6050
@@ -76,10 +76,10 @@ const int NUM_SHORTCUTS = sizeof(shortcutNames) / sizeof(shortcutNames[0]);
 bool hidKeyboardEnabled = false;
 bool hidInitialized = false;
 
-const char* twilio_account_sid = "AC61782b679ad87691f8b9733ad3f63cb7";
-const char* twilio_auth_token = "2e962f56f30653f74b30e2566bf21317";
-const char* twilio_from_number = "+19805401970";
-const char* twilio_to_number = "+918015014123";
+const char* twilio_account_sid = "xxxxxxxxxxxxxxxxxxxx";
+const char* twilio_auth_token = "xxxxxxxxxxxxxxxxxxxxx";
+const char* twilio_from_number = "xxxxxxxxxxxxxxxxxxxxxxx";
+const char* twilio_to_number = "xxxxxxxxxxxxxxxxxxxx";
 
 bool sosTriggered = false;
 unsigned long lastSOSTime = 0;
@@ -318,7 +318,7 @@ const char* ocrHost = "api.ocr.space";
 const int ocrPort = 443;
 
 // ===== VoiceRSS TTS API =====
-#define VOICERSS_API_KEY "7566ac2f1e004b278b650133e3d66836"
+#define VOICERSS_API_KEY "xxxxxxxxxxxxxxx"
 #define VOICERSS_URL "http://api.voicerss.org/"
 
 // Notification ring buffer
@@ -422,7 +422,7 @@ bool isNaming = false;
 //finished
 const char* gemini_ssid = "KMT's MOBILE";
 const char* gemini_password = "asdfghjkl";
-const char* gemini_api_key = "AIzaSyBi8hBOK_C_xE0gV0fJfVSHVCuJcpj-SMk";
+const char* gemini_api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
 const char* gemini_api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 bool notifyActive = false;
@@ -2367,7 +2367,7 @@ bool downloadAndUpdateOTA(const char* url) {
 void checkForOTAUpdate() {
   Serial.println("[OTA] Checking for firmware updates...");
   playWAV("/TACTI_VISION_WAV/Firmware_check.wav");
-  
+
   if (!ensureWiFiConnected()) {
     //Serial.println("[OTA] WiFi connection failed");
     vibe(0.15);
@@ -2405,7 +2405,7 @@ void checkForOTAUpdate() {
   } else {
     Serial.println("[OTA] ✅ You're running the latest version");
     Serial.printf("[OTA] Current: %s\n", CURRENT_FIRMWARE_VERSION);
-    playWAV("/TACTI_VISION_WAV/latestversion.wav"); 
+    playWAV("/TACTI_VISION_WAV/latestversion.wav");
     vibe(0.2);
     delay(2000);
     enterMode(MODE_OPTIONS);
@@ -2420,7 +2420,7 @@ void performOTAUpdate() {
   if (downloadAndUpdateOTA(otaFirmwareURL.c_str())) {
     Serial.println("[OTA] ✅ Update successful!");
     Serial.println("[OTA] Rebooting in 2 seconds...");
-    playWAV("/TACTI_VISION_WAV/update_sucess.wav"); 
+    playWAV("/TACTI_VISION_WAV/update_sucess.wav");
     vibe(0.8);
     delay(2000);
     ESP.restart();
@@ -3153,11 +3153,11 @@ void toggleAlphabetAudio() {
 
   if (alphabetAudioEnabled) {
     Serial.println("[ALPHABET AUDIO] ENABLED");
-     playWAV("/TACTI_VISION_WAV/Alpha_enab.wav"); 
+    playWAV("/TACTI_VISION_WAV/Alpha_enab.wav");
     vibe(0.3);
   } else {
     Serial.println("[ALPHABET AUDIO] DISABLED");
-    playWAV("/TACTI_VISION_WAV/Alpha_disable.wav"); 
+    playWAV("/TACTI_VISION_WAV/Alpha_disable.wav");
     vibe(0.2);
   }
 }
@@ -3233,7 +3233,7 @@ void stopCurrentAudio() {
     wav->stop();
     audioPlaying = false;
     Serial.println("[AUDIO PLAYER] Playback stopped");
-    playWAV("/TACTI_VISION_WAV/playbackstopped.wav"); 
+    playWAV("/TACTI_VISION_WAV/playbackstopped.wav");
     vibe(0.2);
   }
 }
@@ -3333,7 +3333,7 @@ void applyTextCorrection() {
     vibe(0.1);
     return;
   }
-  playWAV("/TACTI_VISION_WAV/Autocorrection.wav");  
+  playWAV("/TACTI_VISION_WAV/Autocorrection.wav");
   Serial.println("\n========== ORIGINAL TEXT ==========");
   Serial.println(currentWord.c_str());
   Serial.println("===================================\n");
@@ -3967,6 +3967,7 @@ void handleSelectButton() {
             isNaming = false;
             currentWord = "";
             Serial.println("You can now start typing your note content.");
+            playWAV("/TACTI_VISION_WAV/hold_save.wav");
             Serial.println("Press Ctrl+Backspace to save when done.");
             vibe(0.2);
           } else {
@@ -4144,16 +4145,16 @@ void handleUpButton() {
         else selectedModeIndex = NUM_MODE_OPTIONS - 1;
         Serial.print(">> ");
         Serial.println(modeNames[selectedModeIndex]);
-        switch(selectedModeIndex) {
-        case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
-        case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
-        case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
-        case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
-        case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
-        case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
-        case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break; 
-        case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
-        case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
+        switch (selectedModeIndex) {
+          case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
+          case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
+          case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
+          case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
+          case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
+          case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
+          case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break;
+          case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
+          case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
         }
       } else if (currentAppMode == SD_NAVIGATION_MODE) {
         if (!sdFiles.empty() && currentFileIndex > 0) {
@@ -4166,14 +4167,14 @@ void handleUpButton() {
         else selectedShortcutIndex = NUM_SHORTCUTS - 1;
         Serial.print(">> ");
         Serial.println(shortcutNames[selectedShortcutIndex]);
-    switch(selectedShortcutIndex) {
-    case 0: playWAV("/TACTI_VISION_WAV/WIFI.wav"); break;
-    case 1: playWAV("/TACTI_VISION_WAV/CHROME.wav"); break;
-    case 2: playWAV("/TACTI_VISION_WAV/GMAIL.wav"); break;
-    case 3: playWAV("/TACTI_VISION_WAV/CHATGPT.wav"); break;
-    case 4: playWAV("/TACTI_VISION_WAV/PY_COMPILER.wav"); break;
-    case 5: playWAV("/TACTI_VISION_WAV/LIBRARY.wav"); break;
-  }
+        switch (selectedShortcutIndex) {
+          case 0: playWAV("/TACTI_VISION_WAV/WIFI.wav"); break;
+          case 1: playWAV("/TACTI_VISION_WAV/CHROME.wav"); break;
+          case 2: playWAV("/TACTI_VISION_WAV/GMAIL.wav"); break;
+          case 3: playWAV("/TACTI_VISION_WAV/CHATGPT.wav"); break;
+          case 4: playWAV("/TACTI_VISION_WAV/PY_COMPILER.wav"); break;
+          case 5: playWAV("/TACTI_VISION_WAV/LIBRARY.wav"); break;
+        }
       }
       if (currentAppMode == AUDIO_PLAYER_MODE) {
         if (audioPlaying) {
@@ -4203,17 +4204,17 @@ void handleDownButton() {
         else selectedModeIndex = 0;
         Serial.print(">> ");
         Serial.println(modeNames[selectedModeIndex]);
-         switch(selectedModeIndex) {
-         case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
-         case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
-         case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
-         case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
-         case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
-         case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
-         case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break;
-         case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
-         case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
-  }
+        switch (selectedModeIndex) {
+          case 0: playWAV("/TACTI_VISION_WAV/NOTIFY.wav"); break;
+          case 1: playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav"); break;
+          case 2: playWAV("/TACTI_VISION_WAV/NOTE_MAKER.wav"); break;
+          case 3: playWAV("/TACTI_VISION_WAV/HID_SHORTCUT.wav"); break;
+          case 4: playWAV("/TACTI_VISION_WAV/B_DRIVE.wav"); break;
+          case 5: playWAV("/TACTI_VISION_WAV/SD_MODE.wav"); break;
+          case 6: playWAV("/TACTI_VISION_WAV/SD_UPLOAD.wav"); break;
+          case 7: playWAV("/TACTI_VISION_WAV/SYSTEM_UPDATE.wav"); break;
+          case 8: playWAV("/TACTI_VISION_WAV/AUDIO_PLAYER.wav"); break;
+        }
       } else if (currentAppMode == SD_NAVIGATION_MODE) {
         if (!sdFiles.empty() && currentFileIndex < sdFiles.size() - 1) {
           currentFileIndex++;
@@ -4225,14 +4226,14 @@ void handleDownButton() {
         else selectedShortcutIndex = 0;
         Serial.print(">> ");
         Serial.println(shortcutNames[selectedShortcutIndex]);
-         switch(selectedShortcutIndex) {
-         case 0: playWAV("/TACTI_VISION_WAV/WIFI.wav"); break;
-         case 1: playWAV("/TACTI_VISION_WAV/CHROME.wav"); break;
-         case 2: playWAV("/TACTI_VISION_WAV/GMAIL.wav"); break;
-         case 3: playWAV("/TACTI_VISION_WAV/CHATGPT.wav"); break;
-         case 4: playWAV("/TACTI_VISION_WAV/PY_COMPILER.wav"); break;
-         case 5: playWAV("/TACTI_VISION_WAV/LIBRARY.wav"); break;
-  }
+        switch (selectedShortcutIndex) {
+          case 0: playWAV("/TACTI_VISION_WAV/WIFI.wav"); break;
+          case 1: playWAV("/TACTI_VISION_WAV/CHROME.wav"); break;
+          case 2: playWAV("/TACTI_VISION_WAV/GMAIL.wav"); break;
+          case 3: playWAV("/TACTI_VISION_WAV/CHATGPT.wav"); break;
+          case 4: playWAV("/TACTI_VISION_WAV/PY_COMPILER.wav"); break;
+          case 5: playWAV("/TACTI_VISION_WAV/LIBRARY.wav"); break;
+        }
       }
       if (currentAppMode == AUDIO_PLAYER_MODE) {
         if (audioPlaying) {
@@ -4500,7 +4501,7 @@ void processBrailleInput(int braillePattern) {
 
   if (braillePattern == NUMERIC_INDICATOR_PATTERN) {
     isNumberMode = true;
-    playWAV("/TACTI_VISION_WAV/num.wav");  
+    playWAV("/TACTI_VISION_WAV/num.wav");
     vibe(0.2);
     Serial.print("[NUM]");
     printBrailleUnicode(braillePattern);
@@ -4625,6 +4626,7 @@ void enterMode(AppMode newMode) {
       } else {
         Serial.print("Current file: ");
         Serial.println(sdFiles[currentFileIndex]);
+        Serial.println("Press ctrl+backspace to get TTS Output");
       }
     } else {
       //Serial.println("SD card not available!");
@@ -4635,6 +4637,7 @@ void enterMode(AppMode newMode) {
     Serial.println("--- GEMINI AI MODE ---");
     playWAV("/TACTI_VISION_WAV/GEMINI_AI.wav");
     vibe(0.2);
+    playWAV("/TACTI_VISION_WAV/hold_query.wav");
 
     // Clear any previous state
     geminiResponseText = "";
@@ -4703,7 +4706,7 @@ void enterMode(AppMode newMode) {
 
     audioPlayerActive = true;
     audioPlaying = false;
-    playWAV("/TACTI_VISION_WAV/Audio_Init.wav"); 
+    playWAV("/TACTI_VISION_WAV/Audio_Init.wav");
     if (sdCardAvailable) {
       // Check if AudioFiles folder exists
       if (!SD.exists("/AudioFiles")) {
@@ -4875,7 +4878,6 @@ void checkKeyCombinations() {
         if (newNoteFileName.length() == 0) {
           newNoteFileName = generateUniqueNoteName();
         }
-        playWAV("/TACTI_VISION_WAV/hold_save.wav"); 
         saveNoteToFile(newNoteFileName, String(currentWord.c_str()));
         lastSavedText = currentWord;
         currentWord = "";
@@ -4960,11 +4962,11 @@ void checkKeyCombinations() {
         String query = String(currentWord.c_str());
         if (query.length() == 0) {
           Serial.println("Nothing to send");
-          playWAV("/TACTI_VISION_WAV/hold_query.wav"); 
+          playWAV("/TACTI_VISION_WAV/hold_query.wav");
           vibe(0.08);
           return;
         }
-        playWAV("/TACTI_VISION_WAV/Sending_Query.wav"); 
+        playWAV("/TACTI_VISION_WAV/Sending_Query.wav");
         String response = queryGemini(query);
         Serial.println("--- GEMINI RESPONSE ---");
         Serial.println(response);
@@ -5141,7 +5143,7 @@ bool ensureWiFiConnected() {
   if (WiFi.status() == WL_CONNECTED) return true;
 
   Serial.println("Connecting to WiFi...");
-  playWAV("/TACTI_VISION_WAV/Connecting_wifi.wav"); 
+  playWAV("/TACTI_VISION_WAV/Connecting_wifi.wav");
   WiFi.mode(WIFI_STA);
   WiFi.begin(gemini_ssid, gemini_password);
 
@@ -5154,7 +5156,7 @@ bool ensureWiFiConnected() {
 
   if (WiFi.status() == WL_CONNECTED) {
     Serial.println("WiFi connected!");
-    playWAV("/TACTI_VISION_WAV/wificonnected.wav"); 
+    playWAV("/TACTI_VISION_WAV/wificonnected.wav");
     //Serial.print("IP: ");
     //Serial.println(WiFi.localIP());
     return true;
@@ -5182,7 +5184,7 @@ String queryGemini(const String& userQuery) {
   String jsonBody;
   serializeJson(requestDoc, jsonBody);
 
-  Serial.println("Sending to Gemini...");
+  Serial.println("\nSending to Gemini...");
   int httpCode = http.POST(jsonBody);
 
   String response = "Error";
