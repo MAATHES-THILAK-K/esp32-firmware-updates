@@ -24,7 +24,7 @@
 Adafruit_MPU6050 mpu;
 
 // ================== OTA UPDATE CONFIG ==================
-#define CURRENT_FIRMWARE_VERSION "V3.1"
+#define CURRENT_FIRMWARE_VERSION "V3.2"
 const char* latestInfoURL = "https://raw.githubusercontent.com/MAATHES-THILAK-K/Stellar_Vision_V1/main/Firmware/latest.json";
 
 // Calibration Offsets - Calibrate them based on your MPU6050
