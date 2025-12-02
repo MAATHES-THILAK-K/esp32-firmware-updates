@@ -1,1 +1,5 @@
-
+{
+  "latest_version": "v3.0",
+  "description": "Introduces enhanced audio feedback for improved user awareness and system responsiveness.",
+  "url": "https://raw.githubusercontent.com/MAATHES-THILAK-K/Stellar_Vision_V1/main/Firmware/releases/firmware_v3.0/firmware.bin"
+}
