@@ -1416,7 +1416,7 @@ Madras Institute of Technology (MIT), Anna University, Chennai
 
 ***
 
-### **Sᴛᴇʟʟᴀʀ Vɪsɪᴏɴ V3.2 – Making Technology Accessible**  
+### **Sᴛᴇʟʟᴀʀ Vɪsɪᴏɴ V1 – Making Technology Accessible**  
 **Firmware Version:** V3.2  
 **Last Updated:** December 2024  
 **Developed by:** Mᴀᴀᴛʜᴇs Tʜɪʟᴀᴋ K  
