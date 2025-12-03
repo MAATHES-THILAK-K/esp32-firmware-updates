@@ -1544,7 +1544,7 @@ All files should be in `/TACTI_VISION_WAV/` folder:
 - **Format:** FAT32 only
 - **Capacity:** Up to 32GB tested
 - **Speed Class:** Class 10 or higher recommended
-- **Brands tested:** SanDisk, Samsung, Kingston
+- **Brands tested:** SanDisk, Samsung, Kingston, Amazon Basics
 
 ### Audio Amplifier
 - **Model:** MAX98357A I2S
